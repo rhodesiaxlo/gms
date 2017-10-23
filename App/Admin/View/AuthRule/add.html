@@ -1,0 +1,68 @@
+<extend name="Public/base"/><block name="body"><div class="Tool_Bar" id="AuthRule_Bar">
+<dl>
+	<dt>菜单管理</dt>
+    {$Main_Nav}
+</dl>
+</div>
+<form id="AuthRule_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#AuthRule_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/AuthRule/add')}" method="post">
+<div title="基础" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<div class="formitm">
+            <label class="lab"  for="for_pid">上级菜单：</label>
+            <div class="ipt">
+                <select name="pid" id="for_pid" class="easyui-combotree" style="height:30px;" data-options="value:'0',url:'{:U("Admin/Function/get_auth_rule")}&r_type=json'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_name">节点：</label>
+            <div class="ipt">
+                <input name="name" id="for_name" type="text" value="" class="easyui-textbox" style="height:30px;" data-options="type:'text'">                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_title">标题：</label>
+            <div class="ipt">
+                <input name="title" id="for_title" type="text" value="" class="easyui-textbox" style="height:30px;" data-options="type:'text'">                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_icon">图标：</label>
+            <div class="ipt">
+                <select name="icon" id="for_icon" class="easyui-combobox" style="height:30px;" data-options="value:'iconfont icon-other',url:'{:U("Admin/Function/get_icon")}&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_type">菜单类型：</label>
+            <div class="ipt">
+                <select name="type" id="for_type" class="easyui-combobox" style="height:30px;" data-options="value:'1',url:'{:U("Admin/Function/get_field_option")}&f_id=41&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_hide">隐藏：</label>
+            <div class="ipt">
+                <select name="hide" id="for_hide" class="easyui-combobox" style="height:30px;" data-options="value:'0',url:'{:U("Admin/Function/get_field_option")}&f_id=42&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_status">状态：</label>
+            <div class="ipt">
+                <select name="status" id="for_status" class="easyui-combobox" style="height:30px;" data-options="value:'1',url:'{:U("Admin/Function/get_field_option")}&f_id=43&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_sort">排序：</label>
+            <div class="ipt">
+                <input name="sort" id="for_sort" value="0" type="text" class="easyui-numberbox" style="height:30px;" data-options="precision:'0',decimalSeparator:'.',groupSeparator:',',required:false">                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_condition">附加规则：</label>
+            <div class="ipt">
+                <textarea name="condition" id="for_condition" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;"></textarea>                <p></p>
+            </div>
+        </div>        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#AuthRule_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+    </div></form>
+</div>
+<!-- 扩展数据 starp-->
+<script type="text/javascript">
+$('#for_icon').combobox({    
+	formatter: function(row){
+		var opts = $(this).combobox('options');
+		return '<i class=\'iconfont '+row[opts.textField]+'\'></i> '+row[opts.textField];
+	}
+}); 
+</script>
+<!-- 扩展数据 end--></block>

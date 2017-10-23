@@ -1,0 +1,47 @@
+/* 主界面Css
+ * Auth : 管侯杰
+ * Email: 912524639@qq.com
+ */
+
+*{font-family:"Microsoft YaHei",微软雅黑;}
+html,body{ margin:0px; padding:0px; height:100%;}
+
+.tabs li .iconfont{ left:10px; top:auto; font-size:12px; margin-top:-2px;}
+
+
+#Main_Layout{ border:0px;}
+#Main_Layout_North{ height:165px; border:0px;}
+#Main_Layout_South{ height:30px; border:0px; background:#2A53A2}
+#Main_Layout_East{ width:0px; border:0px;}
+#Main_Layout_West{ width:0px; border:0px;}
+
+#Main_Logo{ width:180px; background: none; border:0; border-bottom:1px solid #F4F4F4; color:#FFF;}
+#Main_Logo a{color:#FFF;text-decoration:none;}
+#Main_Logo .Logo{line-height:40px; font-size:14px; float:left}
+#Main_Logo .Main_Nav_Switch{line-height:40px; font-size:18px; background:#6A83BB; padding:0 10px 0 10px; float:right}
+/* header */
+#Main_Ribbon .tabs-header{ background: #2A53A2}
+#Main_Ribbon .tabs li a.tabs-inner{ background: #2A53A2; color:#FFF; border:0; border-bottom:1px solid #F4F4F4;}
+#Main_Ribbon .tabs li a.tabs-inner:hover{ background: #6A83BB; color:#FFF}
+#Main_Ribbon .tabs li a.tabs-inner .tabs-title{ font-size:14px; line-height:30px;}
+#Main_Ribbon .tabs li a.tabs-inner .tabs-icon{ font-size:14px;}
+#Main_Ribbon .tabs li.tabs-selected a.tabs-inner{ background: #F4F4F4; color:#2A53A2; border:0; border-bottom:1px solid #F4F4F4;}
+#Main_Ribbon .tabs li.tabs-selected a.tabs-inner:hover{}
+#Main_Ribbon .ribbon-tab{ background:#F4F4F4;}
+#Main_Ribbon .l-btn i{font-size:14px;}
+#Main_Ribbon .l-btn-large,#Main_Ribbon .l-btn-large .l-btn-text{ height:76px;}
+#Main_Ribbon .l-btn-large .l-btn-text{ line-height:35px;}
+#Main_Ribbon .l-btn-large i{ display:block; font-size:36px; line-height:40px;}
+
+/* body */
+.tabs_box{ padding:5px;overflow-x:hidden;overflow-y:hidden;}
+
+/* footer */
+#Main_Layout_South{color:#CCC; line-height:30px; text-align:center}
+#Main_Layout_South a{ color:#FFF;}
+
+#Main_Ribbon .Main_R_0{ background:#F4F4F4 url(../images/Skin/Main_R_0.png) no-repeat right top;}
+#Main_Ribbon .Main_R_1{ background:#F4F4F4 url(../images/Skin/Main_R_1.png) no-repeat right top;}
+#Main_Ribbon .Main_R_2{ background:#F4F4F4 url(../images/Skin/Main_R_2.png) no-repeat right top;}
+#Main_Ribbon .Main_R_3{ background:#F4F4F4 url(../images/Skin/Main_R_3.png) no-repeat right top;}
+#Main_Ribbon .Main_R_218{ background:#F4F4F4 url(../images/Skin/Main_R_218.png) no-repeat right top;}

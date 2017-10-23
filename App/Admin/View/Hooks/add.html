@@ -1,0 +1,40 @@
+<extend name="Public/base"/><block name="body"><div class="Tool_Bar" id="Hooks_Bar">
+<dl>
+	<dt>钩子管理</dt>
+    {$Main_Nav}
+</dl>
+</div>
+<form id="Hooks_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Hooks_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/Hooks/add')}" method="post">
+<div title="基础" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<div class="formitm">
+            <label class="lab"  for="for_name">钩子名称：</label>
+            <div class="ipt">
+                <input name="name" id="for_name" type="text" value="" class="easyui-textbox" style="height:30px;" data-options="type:'text'">                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_description">描述：</label>
+            <div class="ipt">
+                <textarea name="description" id="for_description" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;"></textarea>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_type">类型：</label>
+            <div class="ipt">
+                <select name="type" id="for_type" class="easyui-combobox" style="height:30px;" data-options="value:'1',url:'{:U("Admin/Function/get_field_option")}&f_id=56&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_addons">插件：</label>
+            <div class="ipt">
+                <textarea name="addons" id="for_addons" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;"></textarea>                <p>以“,”分割</p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_status">状态：</label>
+            <div class="ipt">
+                <select name="status" id="for_status" class="easyui-combobox" style="height:30px;" data-options="value:'1',url:'{:U("Admin/Function/get_field_option")}&f_id=59&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div>        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Hooks_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+    </div></form>
+</div>
+<!-- 扩展数据 starp-->
+<!-- 扩展数据 end--></block>

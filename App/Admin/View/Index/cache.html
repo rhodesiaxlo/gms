@@ -1,0 +1,33 @@
+<extend name="Public/base"/>
+<block name="body">
+<div class="Tool_Bar" id="Cache_Bar">
+<dl>
+	<dt>缓存更新</dt>
+	<dd><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('Config_Data_List');"><span>缓存类别</span></a></dd>
+</dl>
+</div>
+
+<fieldset class="Form_1">
+	<div class="formitm">
+		<label>更新站点数据缓存</label>
+		<div class="ipt">
+			<a class="easyui-linkbutton" href="{:U('Index/cache',array('type'=>'site'))}"><span style="font-size: 14px; font-weight: 600;">更新站点数据缓存</span></a>
+			<p>修改过站点设置，或者模型，模块安装等时可以进行缓存更新</p>
+		</div>
+	</div>
+	<div class="formitm">
+		<label class="lab" for="for_name">更新站点模板缓存</label>
+		<div class="ipt">
+			<a class="easyui-linkbutton" href="{:U('Index/cache',array('type'=>'template'))}"><span style="font-size: 14px; font-weight: 600;">更新站点数据缓存</span></a>
+			<p>当修改模板时，模板没及时生效可以对模板缓存进行更新</p>
+		</div>
+	</div>
+	<div class="formitm">
+		<label class="lab" for="for_name">清除网站运行日志</label>
+		<div class="ipt">
+			<a class="easyui-linkbutton" href="{:U('Index/cache',array('type'=>'logs'))}"><span style="font-size: 14px; font-weight: 600;">更新站点数据缓存</span></a>
+			<p>网站运行过程中会记录各种错误日志，以文件的方式保存</p>
+		</div>
+	</div>
+</fieldset>
+</block>

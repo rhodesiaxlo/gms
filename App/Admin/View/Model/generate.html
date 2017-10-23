@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+
+<block name="body">
+<div class="Tool_Bar" id="Model_Bar">
+<dl>
+	<dt>模型管理</dt>
+	{$Main_Nav}
+</dl>
+</div>
+<form id="Model_Form" method="post">
+	<fieldset class="Form_1">
+      <div class="formitm">
+        <label class="lab"  for="for_table">数据表：</label>
+        <div class="ipt">
+			<select style="height:30px;" id="for_table" name="table" class="easyui-combobox" data-options="editable:false">
+				<volist name="tables" id="tb">
+				<option value="{$tb}">{$tb}</option>
+				</volist>
+			</select>
+          <p>选择要系统化的数据表</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_name">模型标识：</label>
+        <div class="ipt">
+          <input type="text" style="height:30px;" id="for_name" name="name" class="easyui-textbox">
+          <p></p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_title">模型名称:</label>
+        <div class="ipt">
+          <input type="text" style="height:30px;" id="for_title" name="title" class="easyui-textbox">
+          <p></p>
+        </div>
+      </div>
+      <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Model_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+</form>
+</block>
+

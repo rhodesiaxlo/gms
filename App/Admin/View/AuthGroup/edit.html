@@ -1,0 +1,35 @@
+<extend name="Public/base"/><block name="body"><div class="Tool_Bar" id="AuthGroup_Bar">
+<dl>
+	<dt>用户组管理</dt>
+    {$Main_Nav}
+</dl>
+</div>
+<form id="AuthGroup_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#AuthGroup_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/AuthGroup/edit')}" method="post">
+<div title="基础" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<div class="formitm">
+            <label class="lab"  for="for_title">用户组标题：</label>
+            <div class="ipt">
+                <input name="title" id="for_title" type="text" value="{$_info["title"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_status">用户组状态：</label>
+            <div class="ipt">
+                <select name="status" id="for_status" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["status"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=34&r_type=json',valueField:'id',textField:'text'"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_rules">用户权限：</label>
+            <div class="ipt">
+                <select name="rules[]" id="for_rules[]" class="easyui-combotree" style="height:30px;" data-options="value:'{$_info["rules"]}',url:'{:U("Admin/Function/get_auth_rule")}&r_type=json',multiple:true,cascadeCheck:false"></select>                <p></p>
+            </div>
+        </div><div class="formitm">
+            <label class="lab"  for="for_sort">排序：</label>
+            <div class="ipt">
+                <input name="sort" id="for_sort" value="{$_info["sort"]}" type="text" class="easyui-numberbox" style="width: 50px;height:30px;" data-options="precision:'0',decimalSeparator:'.',groupSeparator:',',required:false">                <p></p>
+            </div>
+        </div>        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#AuthGroup_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+    </div><input name="id" type="hidden" value="{:I('get.id')}" />
+<!-- 扩展数据 starp-->
+<!-- 扩展数据 end-->
+</form></block>

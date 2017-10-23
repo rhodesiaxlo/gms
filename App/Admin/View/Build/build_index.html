@@ -1,0 +1,175 @@
+
+<div class="Tool_Bar" id="{$ModelInfo['name']}_Bar">
+<dl>
+	<dt>{$Model_Title}管理</dt>
+    <literal>{$Main_Nav}</literal>
+</dl>
+</div>
+<div style="display: none">
+<form id="{$ModelInfo['name']}_Search_From" >
+<fieldset class="Form_1 Form_2">
+<volist name="_Search" id="_Search">
+<div class="formitm">
+	<label class="lab" for="for_{$_Search['name']}">{$_Search['title']} ：</label>
+	<div class="ipt">{$_Search['form']}</div>
+</div>
+</volist>
+</fieldset>
+</form>
+</div>
+<table id="{$ModelInfo['name']}_Data_List"></table>
+<?php
+foreach ($_List as $key => $field ) {
+$extra=unserialize($field['extra']);
+if(in_array($field['type'],array('select','checkbox'))){
+if($extra['type']=='Option'){
+?>
+<script charset="utf-8" src="<literal>{:U('Admin/Function/get_field_option',array('f_id'=>'</literal>{$field['id']}<literal>','r_type'=>'json_list'))}</literal>"></script>
+<?php 
+}elseif($extra['type']=='Config'){
+?>
+<script charset="utf-8" src="<literal>{:U('Admin/Function/get_config',array('r_name'=>'</literal>{$field['name']}<literal>'))}&cname=</literal>{$extra['option']}&r_type=json_list"></script>
+<?php 
+}elseif($extra['type']=='Function'){
+$extra_option_arr = explode('|',$extra['option']);
+?>
+<script charset="utf-8" src="<literal>{:U('</literal>{$extra_option_arr[0]}<literal>')}</literal>&r_type=json_list"></script>
+<?php 
+}
+}
+}
+?>
+<script type="text/javascript">
+$(function() {
+	$("#{$ModelInfo['name']}_Data_List").datagrid({
+		url : "<literal>{:U('</literal>{$ModelInfo['name']}<literal>/index')}</literal>",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#{$ModelInfo["name"]}_Bar',
+		singleSelect : true,
+		frozenColumns:[[
+			{field : 'id',title : 'ID',width : 40,sortable:true}
+<?php foreach ($_List as $key => $field ) {
+if($field['is_fixed']==1){
+	$extra=unserialize($field['extra']);
+
+	if(in_array($field['type'],array('select','checkbox'))){
+			echo ',
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo 'formatter: function (value, row, index) {
+					return op_'.$field["name"].'[value];
+			}}
+			';
+	}elseif(in_array($field['type'],array('datetime'))){
+		if($extra['from_type']=='datetimebox'){
+			echo ',
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo ',formatter: function (value, row, index) {
+				return u_to_ymdhis(value)
+			}}
+			';
+		}else{
+			echo ',
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo ',formatter: function (value, row, index) {
+				return u_to_ymd(value)
+			}}
+			';
+		}
+	}else{
+			echo ',
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"];
+			if($field['is_sort'] == 1){
+				echo ',sortable:true,';
+			}
+			echo '}
+			';
+	}
+}
+}?>	
+		]],
+		columns : [[
+<?php foreach ($_List as $key => $field ) {
+if($field['is_fixed']==0){
+	$extra=unserialize($field['extra']);
+	if(in_array($field['type'],array('select','checkbox'))){
+			echo '
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo 'formatter: function (value, row, index) {
+					return op_'.$field["name"].'[value];
+			}},
+			';
+	}elseif(in_array($field['type'],array('datetime'))){
+		if($extra['from_type']=='datetimebox'){
+			echo '
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo 'formatter: function (value, row, index) {
+				return u_to_ymdhis(value)
+			}},
+			';
+		}else{
+			echo '
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',';
+			if($field['is_sort'] == 1){
+				echo 'sortable:true,';
+			}
+			echo 'formatter: function (value, row, index) {
+				return u_to_ymd(value)
+			}},
+			';
+		}
+	}else{
+			echo '
+			{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].'';
+			if($field['is_sort'] == 1){
+				echo ',sortable:true';
+			}
+			echo '},
+			';
+	}
+}
+}?>	
+
+			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<literal><if condition="Is_Auth('Admin/</literal><?php echo $ModelInfo['name'];?><literal>/edit')"></literal>
+				<literal>operate_menu = operate_menu+"<a href='<?php echo "<?php echo U('edit'); ?>"; ?>&id="+row.id+"' >编辑</a>";</literal>
+				<literal></if></literal>
+
+				<literal><if condition="Is_Auth('Admin/</literal><?php echo $ModelInfo['name'];?><literal>/del')"></literal>
+				<literal>operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Ajax('<?php echo "<?php echo U('del'); ?>"; ?>&id="+row.id+"','<?php echo $ModelInfo['name'];?>_Data_List');\">删除</a>";</literal>
+				<literal></if></literal>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+<!-- 扩展数据 starp-->
+{$Model_Info['_Parent_Model_Info']['index_extend']|htmlspecialchars_decode}
+{$Model_Info['index_extend']|htmlspecialchars_decode}
+<!-- 扩展数据 end-->
+</script>

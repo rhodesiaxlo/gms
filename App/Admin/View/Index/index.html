@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>管理控制台 | {:C('SOFT_NAME')}</title>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/Easyui/themes/ThinkGMS/easyui.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/Easyui/Exten/Ribbon/ribbon.css">
+    <link rel="stylesheet" href="__STATIC__/IconFont/iconfont.css">
+	<link href="__CSS__/main.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/Jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/Easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="__STATIC__/Easyui/Exten/Ribbon/jquery.ribbon.js"></script>
+	<script type="text/javascript" src="__JS__/Main.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#Kzt').attr('src',"{:U('Admin/Index/main')}");
+	})
+    </script>
+</head>
+<body>
+<div id="Main_Logo"><a class="Logo" href="{:U('Admin/Index/index')}">{:C('SOFT_NAME')} v{:C('SOFT_VERSION')}</a> <a href="#" class="Main_Nav_Switch" onClick="Main_Nav_Switch()"><i class="iconfont icon-up" title="收缩"></i></a></div>
+<div id="Main_Layout" class="easyui-layout" data-options="fit:true">
+	<div id="Main_Layout_North" data-options="region:'north'">
+    <!-- 选项卡导航 Starp-->
+    <div id="Main_Ribbon" class="easyui-ribbon" data-options="fit:true,tools:'#Main_Logo',plain:true,toolPosition:'left',tabHeight:40"> 
+    	<div title="控制台" data-options="iconCls:'iconfont icon-home',bodyCls:'Main_R_0'" >
+			<div class="ribbon-group">
+                <div class="ribbon-toolbar">
+                	<a class="easyui-linkbutton" href="{:U('Admin/Index/main')}" name="/kzt" data-options="plain:true"><i class="iconfont icon-home"></i><strong>控制台</strong></a><br>
+                	<a class="easyui-linkbutton" href="{:U('Admin/User/updateuserinfo')}" name="Admin/User/updateuserinfo" data-options="plain:true"><i class="iconfont icon-yonghu"></i><strong>修改资料</strong></a><br>
+                	<a class="easyui-linkbutton" href="{:U('Admin/User/updatepassword')}" name="Admin/User/updatepassword" data-options="plain:true"><i class="iconfont icon-yonghu"></i><strong>修改密码</strong></a><br>
+				</div>
+                <div class="ribbon-toolbar"> 
+                	<a class="easyui-linkbutton" href="{:U('Admin/Index/cache')}" name="Admin/Index/cache" data-options="plain:true,size:'large'"><i class="iconfont icon-reload"></i><strong>更新缓存</strong></a> 
+                </div>
+                <div class="ribbon-toolbar"> 
+                	<a class="easyui-linkbutton" href="{:U('Admin/Public/logout')}" name="Admin/Public/logout" data-options="plain:true,size:'large'"><i class="iconfont icon-undo"></i><strong>退出</strong></a> 
+                </div>
+                <div class="ribbon-group-title">常用操作</div> 
+			</div>
+        </div>
+    	<volist name="_Admin_Menu" id="v">
+    	<div title="{$v['title']}" data-options="iconCls:'{$v['icon']}',bodyCls:'Main_R_{$v['id']}'">
+        	<volist id="vo" name="v['children']">
+            <div class="ribbon-group">
+                <div class="ribbon-toolbar">
+                	<volist id="vo2" name="vo['children']" mod="3">
+                	<a class="easyui-linkbutton" href="{$vo2['url']}" name="{$vo2['name']}" data-options="plain:true"><i class="{$vo2['icon']}"></i><strong>{$vo2['title']}</strong></a><br>
+                <eq name="mod" value="2"></div><div class="ribbon-toolbar"></eq>
+                    </volist>
+                </div>
+                <div class="ribbon-group-title">{$vo['title']}</div> 
+            </div> 
+            <div class="ribbon-group-sep"></div>
+            </volist>
+        </div>
+    	</volist>
+    </div>
+    <!-- 选项卡导航 End-->
+    </div>
+    <div id="Main_Layout_Center" data-options="region:'center'">
+    <div id="MainTabs" class="easyui-tabs" data-options="fit:true,border:false">
+		<div title="控制台" data-options="closable:false,id:'tabs_kzt',iconCls:'iconfont icon-home',bodyCls:'tabs_box'"><iframe scrolling="yes" frameborder="0" id="Kzt" style="width:100%;height:100%;"></iframe></div>
+	</div>
+    </div>
+    <div id="Main_Layout_South" data-options="region:'south',split:false">Powered by <a href="{:C('SOFT_SITE')}">{:C('SOFT_NAME')} v {:C('SOFT_VERSION')}</a> | Copyright © <a href="{:C('SOFT_AUTHOR_SITE')}">{:C('SOFT_AUTHOR')}</a> All rights reserved.</div>
+</div>
+</body>
+</html>

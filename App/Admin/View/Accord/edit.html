@@ -1,0 +1,31 @@
+<extend name="Admin@Public/base"/>
+<block name="body">
+<div class="Tool_Bar" id="{$Model_Name}_Bar">
+<dl>
+	<dt>{$Model_Title}</dt>
+	{$Main_Nav}
+</dl>
+</div>
+<form id="{$Model_Name}_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#{$Model_Name}_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U($Model_Name.'/edit')}" method="post">
+<volist name="FIELD_GROUP" id="FIELD_GROUP">
+    <div title="{$FIELD_GROUP}" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<volist name="_Form[$key]" id="Form">
+        <div class="formitm">
+            <label class="lab"  for="for_{$Form['name']}">{$Form['title']}：</label>
+            <div class="ipt">
+                {$Form['form']}
+                <p>{$Form['remark']}</p>
+            </div>
+        </div>
+        </volist>
+        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#{$Model_Name}_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+    </div>
+</volist><input name="id" type="hidden" value="{:I('get.id')}" />
+</form>
+<!-- 扩展数据 starp-->
+{$Model_Info['_Parent_Model_Info']['edit_extend']}
+{$Model_Info['edit_extend']}
+<!-- 扩展数据 end-->
+</block>

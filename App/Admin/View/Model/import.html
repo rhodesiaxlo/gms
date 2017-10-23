@@ -1,0 +1,37 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="Tool_Bar" id="Model_Bar">
+<dl>
+	<dt>模型管理</dt>
+	{$Main_Nav}
+</dl>
+</div>
+<form id="Model_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Model_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Model/import')}" method="post">
+<div title="模型导入" style="padding:20px;">
+	<fieldset class="Form_1">
+      <div class="formitm">
+        <label class="lab"  for="for_name">模型标识：</label>
+        <div class="ipt">
+          <input name="name" style="height:30px;" id="for_name" value="" type="text" class="easyui-textbox">
+          <p>为空时按配置文件中的</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_tablename">模型表键名：</label>
+        <div class="ipt">
+          <input name="tablename" style="height:30px;" id="for_tablename" value="" type="text" class="easyui-textbox">
+          <p>为空时按配置文件中的</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_tablename">模型文件：</label>
+        <div class="ipt">
+          <input id="fields_import_file_box" name="import_file" value="" class="easyui-textbox" data-options="buttonText:'上传',buttonIcon:'iconfont icon-search',prompt:'上传文件...',onClickButton:function(){updata_fields('fields_import_file_box')}" style="width:250px;height:24px;" >
+          <p style="color:#f00">必须选择</p>
+        </div>
+      </div>
+      <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Model_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+	</fieldset>
+</div>
+</form>
+</block>

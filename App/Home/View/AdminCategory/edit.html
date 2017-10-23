@@ -1,0 +1,94 @@
+<extend name="Admin@Public/base"/>
+<block name="body">
+  <div class="Tool_Bar" id="Category_Bar">
+    <dl>
+      <dt>分类管理</dt>
+      {$Main_Nav}
+    </dl>
+  </div>
+  <form id="Category_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Category_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/Category/edit')}" method="post">
+    <div title="基础" style="padding:20px;">
+      <fieldset class="Form_1">
+        <div class="formitm">
+          <label class="lab"  for="for_pid">上级分类：</label>
+          <div class="ipt">
+            <select name="pid" id="for_pid" class="easyui-combotree" style="height:30px;" data-options="value:'{$_info["pid"]}',url:'{:U("Home/Api/get_category")}&r_type=json'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_title">栏目名称：</label>
+          <div class="ipt">
+            <input name="title" id="for_title" type="text" value="{$_info["title"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_child">终极栏目：</label>
+          <div class="ipt">
+            <select name="child" id="for_child" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["child"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=101&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_domain">栏目绑定域名：</label>
+          <div class="ipt">
+            <input name="domain" id="for_domain" type="text" value="{$_info["domain"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_image">栏目图片：</label>
+          <div class="ipt">
+            <div class="t_img_box"><img id="img_image_box_show" src="{$_info["image"]}" onclick="updata_image('img_image_box')" /></div>
+            <input id="img_image_box" name="image" value="{$_info["image"]}" style="display:none;"/>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_description">栏目描述：</label>
+          <div class="ipt">
+            <textarea name="description" id="for_description" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;">{$_info["description"]}</textarea>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_status">状态：</label>
+          <div class="ipt">
+            <select name="status" id="for_status" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["status"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=115&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_hits">点击：</label>
+          <div class="ipt">
+            <input name="hits" id="for_hits" value="{$_info["hits"]}" type="text" class="easyui-numberbox" style="height:30px;" data-options="precision:'0',decimalSeparator:'.',groupSeparator:',',required:false">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_sort">排序：</label>
+          <div class="ipt">
+            <input name="sort" id="for_sort" type="text" value="{$_info["sort"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_ismenu">显示：</label>
+          <div class="ipt">
+            <select name="ismenu" id="for_ismenu" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["ismenu"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=112&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Category_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+      </fieldset>
+    </div>
+    <input name="id" type="hidden" value="{:I('get.id')}" />
+    <!-- 扩展数据 starp--> 
+    <!-- 扩展数据 end-->
+  </form>
+</block>

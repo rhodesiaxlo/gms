@@ -1,0 +1,57 @@
+<extend name="Public/base"/>
+<block name="body">
+  <div class="Tool_Bar" id="Config_Bar">
+    <dl>
+      <dt>配置管理</dt>
+      {$Main_Nav}
+    </dl>
+  </div>
+  <form id="Config_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Config_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('group')}&id={$id}" method="post">
+    <volist name="_Type" id="_Type" key="_K">
+      <div title="{$_Type}配置" style="padding:20px;">
+        <fieldset class="Form_1">
+          <volist name="_Type_List[$_K]" id="config">
+            <div class="formitm">
+              <label for="for_{$config.name}">{$config.title}</label>
+              <div class="ipt">
+                <switch name="config.type">
+                  <case value="0">
+                    <input type="text" name="config[{$config.name}]" id="for_{$config.name}" value="{$config.value}" class="easyui-numberbox" style="height: 30px;"/>
+                  </case>
+                  <case value="1">
+                    <input type="text" name="config[{$config.name}]" id="for_{$config.name}" value="{$config.value}" class="easyui-textbox" style="height: 30px;"/>
+                  </case>
+                  <case value="2">
+                    <textarea name="config[{$config.name}]" id="for_{$config.name}" type="text" class="easyui-textbox" style="width: 300px; height: 100px;" data-options="required:false,multiline:true">{$config.value}</textarea>
+                  </case>
+                  <case value="3">
+                    <textarea name="config[{$config.name}]" id="for_{$config.name}" type="text" class="easyui-textbox" style="width: 300px; height: 100px;" data-options="required:false,multiline:true">{$config.value}</textarea>
+                  </case>
+                  <case value="4">
+                    <select name="config[{$config.name}]" id="for_{$config.name}" class="easyui-combobox" data-options="value:'{$config.value}',multiple:false,required:false,editable:false" style="height: 30px;">
+                      <volist name=":model_field_attr($config['extra'])" id="vo">
+                        <option value="{$key}">{$vo}</option>
+                      </volist>
+                    </select>
+                  </case>
+                  <case value="5">
+                    <input type="text" name="config[{$config.name}]" id="for_{$config.name}" value="{$config.value}" class="easyui-kindeditor" config_date="1" style="width: 600px; height: 300px;">
+                  </case>
+                  <case value="6">
+                    <?php 
+                    $_Extra_option_arr = explode('|',$config['extra']);
+                    ?>
+                    <select name="config[{$config.name}]" id="for_{$config.name}" class="easyui-combobox" data-options="url:'{:U($_Extra_option_arr[0])}&r_type=json',valueField:'id',textField:'text',value:'{$config.value}',multiple:false,required:false,editable:false" style="height: 30px;">
+                    </select>
+                  </case>
+                </switch>
+                <p>{$config.remark}</p>
+              </div>
+            </div>
+          </volist>
+          <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Config_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+        </fieldset>
+      </div>
+    </volist>
+  </form>
+</block>

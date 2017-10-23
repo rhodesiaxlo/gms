@@ -1,0 +1,83 @@
+/* 基础Css
+ * Auth : 管侯杰
+ * Email: 912524639@qq.com
+ */
+ 
+*{font-family:"Microsoft YaHei",微软雅黑;}
+html,body{ margin:0px; padding:0px; height:100%;}
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,button,keygen,legend{font:12px/1.14;color:#333;outline:0;}
+a,a:hover{color:#333;text-decoration:none;}
+
+/* easyui 重构*/
+.l-btn{ background:#2A53A2}
+.l-btn:hover{ background: #6A83BB;}
+.l-btn-text {color:#FFF;}
+.l-btn-icon {color:#FFF;}
+/* 菜单栏 */
+.Tool_Bar { height:42px; padding:0 10px; margin: 0px; border:0px; border-bottom:1px #ddd solid;}
+.Tool_Bar dl{line-height: 20px; padding:5px 0px 5px 0px; font-weight:700; clear: both;overflow: hidden;}
+.Tool_Bar dt{ float: left; margin-right:3px; color:#2b394a;padding:5px 0px 5px 0px;font-size:16px;}
+.Tool_Bar dd{ float: left; margin:5px 0px 5px 5px; padding:0px 0px 0px 5px; border-left:1px dotted #ccc;}
+.Tool_Bar dd a{ height: 20px; padding:2px 5px; line-height: 20px; font-size:12px; font-weight: 700; background:#e4e9f0; color:#37485d;}
+.Tool_Bar dd a:hover{ background:#2A53A2; color:#FFF;}
+.Tool_Bar dd a.current{ background:#2A53A2; color:#FFF;}
+
+/* 更新数据表单 */
+.Form_1 { line-height:29px; color:#555; padding: 0 0 10px 0; font-size:12px;}
+.Form_1 legend{font-size:14px;font-weight:bold;}
+.Form_1 .formitm{padding:10px 0 10px 0;line-height:20px; clear: both;border-bottom: 1px dashed #ddd;}
+.Form_1 .formitm-1{padding-left:100px;}
+.Form_1 .lab{ float:left;width:100px;margin-right:-100px;text-align:right;font-size:12px;font-weight:bold;}
+.Form_1 label{float:left;width:100px;margin-right:-100px;text-align:right;font-size:12px;font-weight:bold;}
+.Form_1 .ipt{margin-left:110px;}
+.Form_1 .ipt *{}
+.Form_1 .ipt a,.Form_1 .ipt a:hover{ text-decoration:none;color:#3891eb; }
+.Form_1 .ipt img{height:32px;margin:0 15px 0 5px;}
+.Form_1 .ipt .domain{margin:0 0 0 5px;font-weight:bold;color:#777;}
+.Form_1 .ipt p{line-height:22px;color:#999;font-size:12px;}
+.Form_1 .tip{padding-top:10px;}
+.Form_1  #extra{ padding-right:10px;}
+.Form_1  #extra table{width:100%;}
+.Form_1  #extra table th{ width:100px; text-align:right; padding:5px; background:#f1f1f1; border-bottom: 1px solid #fff; border-right: 1px solid #fff;}
+.Form_1  #extra table td{ padding:5px; background:#f1f1f1; border-bottom: 1px solid #fff;}
+.Form_1 .easyui-textbox{ min-width:200px; line-height:30px;}
+.Form_1 .easyui-numberbox{ min-width:200px;line-height:30px;}
+.Form_1 .easyui-combo{ min-width:200px;line-height:30px;}
+.Form_1 .easyui-combobox{ min-width:200px;line-height:30px;}
+.Form_1 .easyui-combotree{ min-width:200px;line-height:30px;}
+.Form_1 .easyui-datebox{ min-width:120px;line-height:30px;}
+.Form_1 .easyui-datetimebox{ min-width:160px;line-height:30px;}
+.Form_1 .easyui-textbox{ min-width:200px; line-height:30px;}
+.Form_1 .t_img_box{ width:202px; height:202px; border:1px solid #666; padding:1px; margin-bottom:5px; text-align:center;vertical-align:middle; line-height:
+200px;}
+.Form_1 .t_img_box img{height:auto;margin:0; max-width:200px; max-height:200px;min-width:150px; min-height:150px;vertical-align:middle}
+
+.Form_2 .easyui-textbox{ width:200px; line-height:30px;}
+.Form_2 .easyui-numberbox{ width:200px;line-height:30px;}
+.Form_2 .easyui-combo{ width:200px;line-height:30px;}
+.Form_2 .easyui-combobox{ width:200px;line-height:30px;}
+.Form_2 .easyui-combotree{ width:200px;line-height:30px;}
+.Form_2 .easyui-datebox{ width:120px;line-height:30px;}
+.Form_2 .easyui-datetimebox{ width:160px;line-height:30px;}
+
+
+/*兼容*/
+.ke-dialog-body .tabs{ height: auto;border:0px;}
+.iconfont{ background:none;}

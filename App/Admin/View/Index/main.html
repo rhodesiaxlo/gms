@@ -1,0 +1,52 @@
+<extend name="Public/base"/>
+<block name="body">
+<style>
+#Main_Portal{ padding-top:5px;}
+.Portal_One{display: inline-table;}
+.panel_header{ background:#2A53A2; margin-top:10px;}
+.panel_header .panel-title{ color:#FFF; line-height:30px;height:30px; font-size:16px;}
+</style>
+	<script>
+		$(function(){
+			Main_Portal();
+		})
+		$(window).resize(function() {
+			Main_Portal();
+		});
+		function Main_Portal(){
+			if($(document).width()<720){
+				$('.Portal_One').width('100%')
+			}else{
+				$('.Portal_One').width('49%')
+			}
+			$.parser.parse()
+		}
+	</script>
+  
+  <div id="Main_Portal">
+    <div class="Portal_One">
+    	<div class="easyui-panel" title="系统信息" style="height:300px;padding:10px;background:#FAFAFA;" data-options="headerCls:'panel_header'">
+			<div class="Form_1">
+                <volist name="Server_Info" id="vo">
+            	<div class="formitm">
+                    <div class="lab" >{$key}：</div>
+                    <div class="ipt" >{$vo}</div>
+                </div>
+                </volist>
+            </div> 
+        </div>
+    </div>
+    <div class="Portal_One">
+    	<div class="easyui-panel" title="版权信息" style="height:300px;padding:10px;background:#FAFAFA;" data-options="headerCls:'panel_header'">
+			<div class="Form_1">
+                <volist name="Soft_Info" id="vo">
+            	<div class="formitm">
+                    <div class="lab" >{$key}：</div>
+                    <div class="ipt" >{$vo}</div>
+                </div>
+                </volist>
+            </div> 
+        </div>
+    </div>
+  </div>
+</block>

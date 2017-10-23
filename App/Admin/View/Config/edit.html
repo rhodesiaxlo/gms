@@ -1,0 +1,85 @@
+<extend name="Public/base"/>
+<block name="body">
+  <div class="Tool_Bar" id="Config_Bar">
+    <dl>
+      <dt>配置管理</dt>
+      {$Main_Nav}
+    </dl>
+  </div>
+  <form id="Config_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Config_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/Config/edit')}" method="post">
+    <div title="基础" style="padding:20px;">
+      <fieldset class="Form_1">
+        <div class="formitm">
+          <label class="lab"  for="for_name">配置名称：</label>
+          <div class="ipt">
+            <input name="name" id="for_name" type="text" value="{$_info["name"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_type">配置类型：</label>
+          <div class="ipt">
+            <select name="type" id="for_type" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["type"]}',url:'{:U("Admin/Function/get_config")}&cname=CONFIG_TYPE_LIST&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_title">配置标题：</label>
+          <div class="ipt">
+            <input name="title" id="for_title" type="text" value="{$_info["title"]}" class="easyui-textbox" style="height:30px;" data-options="type:'text'">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_group">配置分组：</label>
+          <div class="ipt">
+            <select name="group" id="for_group" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["group"]}',url:'{:U("Admin/Function/get_config")}&cname=CONFIG_GROUP_LIST&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_extra">配置参数：</label>
+          <div class="ipt">
+            <textarea name="extra" id="for_extra" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;">{$_info["extra"]}</textarea>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_remark">说明：</label>
+          <div class="ipt">
+            <textarea name="remark" id="for_remark" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;">{$_info["remark"]}</textarea>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_status">状态：</label>
+          <div class="ipt">
+            <select name="status" id="for_status" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["status"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=27&r_type=json',valueField:'id',textField:'text'">
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_value">配置值：</label>
+          <div class="ipt">
+            <textarea name="value" id="for_value" class="easyui-textbox" data-options="required:false,multiline:true" style="width:300px; height:100px;">{$_info["value"]}</textarea>
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm">
+          <label class="lab"  for="for_sort">排序：</label>
+          <div class="ipt">
+            <input name="sort" id="for_sort" value="{$_info["sort"]}" type="text" class="easyui-numberbox" style="height:30px;" data-options="precision:'0',decimalSeparator:'.',groupSeparator:',',required:false">
+            <p></p>
+          </div>
+        </div>
+        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Config_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+      </fieldset>
+    </div>
+    <input name="id" type="hidden" value="{:I('get.id')}" />
+    <!-- 扩展数据 starp--> 
+    <!-- 扩展数据 end-->
+  </form>
+</block>

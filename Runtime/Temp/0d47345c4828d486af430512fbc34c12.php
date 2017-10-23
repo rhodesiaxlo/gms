@@ -1,0 +1,3 @@
+<?php
+//000000000000a:2:{i:1;a:8:{s:2:"id";s:1:"1";s:4:"name";s:11:"Admin_Login";s:5:"title";s:15:"管理员登录";s:6:"remark";s:12:"系统记录";s:4:"rule";s:0:"";s:3:"log";s:55:"[user|get_username]在[time|time_format]登录了后台";s:4:"type";s:1:"1";s:6:"status";s:1:"1";}i:2;a:8:{s:2:"id";s:1:"2";s:4:"name";s:12:"Admin_Logout";s:5:"title";s:15:"管理员退出";s:6:"remark";s:12:"系统记录";s:4:"rule";s:0:"";s:3:"log";s:52:"[user|get_username]在[time|time_format]退出系统";s:4:"type";s:1:"1";s:6:"status";s:1:"1";}}
+?>

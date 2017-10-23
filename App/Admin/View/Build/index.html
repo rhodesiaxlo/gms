@@ -1,0 +1,87 @@
+<extend name="Public/base" />
+
+<block name="body">
+<div class="Tool_Bar" id="Build_Bar">
+<dl>
+	<dt>生成文件</dt>
+	<if condition="Is_Auth('Admin/Model/index')">
+	<dd><a href="{:U('Admin/Model/index')}" onclick="JavaScript:window.location.href='{:U('Admin/Model/index')}'"><span>列表</span></a></dd>
+	</if>
+</dl>
+</div>
+<form id="Build_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Build_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/Build_Bar/index')}" method="post">
+<div title="生成文件类型" style="padding:20px;">
+    <fieldset class="Form_1">
+		<if condition="$ModelInfo['is_extend'] neq 1">
+		<div class="formitm">
+            <label class="lab"  for="for_build_action">生成控制器：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_action" name="build_action" class="easyui-combobox" data-options="value:'1',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		</if>
+		<div class="formitm">
+            <label class="lab"  for="for_build_model">生成模型：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_model" name="build_model" class="easyui-combobox" data-options="value:'1',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		<if condition="$ModelInfo['is_extend'] neq 1">
+		<div class="formitm">
+            <label class="lab"  for="for_build_rule">生成菜单：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_rule" name="build_rule" class="easyui-combobox" data-options="value:'0',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		<if condition="$ModelInfo['model_build'] lt 1">
+		<div class="formitm">
+            <label class="lab"  for="for_build_tpl_index">生成列表：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_tpl_index" name="build_tpl_index" class="easyui-combobox" data-options="value:'1',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		<div class="formitm">
+            <label class="lab"  for="for_build_tpl_add">生成新增：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_tpl_add" name="build_tpl_add" class="easyui-combobox" data-options="value:'1',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		<div class="formitm">
+            <label class="lab"  for="for_build_tpl_edit">生成更改：</label>
+            <div class="ipt">
+                <select style="height:30px;" id="for_build_tpl_edit" name="build_tpl_edit" class="easyui-combobox" data-options="value:'1',multiple:false,required:false,editable:false">
+					<option value="0" >不生成</option>
+					<option value="1" >生成</option>
+				</select>
+                <p></p>
+            </div>
+        </div>
+		</if>
+		</if>
+		<div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Build_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+</div>
+<input name="model_id" type="hidden" value="{$model_id}" />
+</form>
+</block>
+

@@ -1,0 +1,76 @@
+<extend name="Public/base"/><block name="body">
+<div class="Tool_Bar" id="Module_Bar">
+<dl>
+	<dt>模块管理</dt>
+	<if condition="Is_Auth('Admin/Module/index')">
+	<dd><a href="{:U('Admin/Module/index')}" onclick="JavaScript:window.location.href='{:U('Admin/Module/index')}'"><span>列表</span></a></dd>
+	</if>
+	<dd><a class="current" href="#"><span>安装</span></a></dd>
+</dl>
+</div>
+<form id="Module_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#Module_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('Admin/Module/install')}" method="post">
+<div title="基础" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<div class="formitm">
+            <label class="lab"  for="for_name">模块名称：</label>
+            <div class="ipt">
+                <strong>{$info['title']}</strong> [{$info['name']}] [{$info['version']}]
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">模块简介：</label>
+            <div class="ipt">
+                {$info['description']}
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">作者：</label>
+            <div class="ipt">
+                {$info['author']}
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">作者E-mail：</label>
+            <div class="ipt">
+                {$info['author_email']}
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">作者主页：</label>
+            <div class="ipt">
+                <a href="{$info['author_site']}" target="_blank">{$info['author_site']}</a>
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">依赖模块：</label>
+            <div class="ipt">
+                <volist name='info["rely_module"]' id='vo'>
+        <php>$v_m=validate_module($vo['name'],$vo['version']);</php>
+        <switch name="v_m" >
+        <case value="1"><a href="{$vo.site}" target="_blank" class="easyui-linkbutton bon2">{$vo.title}[{$vo.name} {$vo.version}] 模块不存在</a></case>
+        <case value="2"><a href="{$vo.site}" target="_blank" class="easyui-linkbutton bon2">{$vo.title}[{$vo.name} {$vo.version}] 版本过低</a></case>
+        <case value="3"><a href="#" class="easyui-linkbutton bon2">{$vo.title}[{$vo.name} {$vo.version}] 模块未启用</a></case>
+        <case value="9"><a href="#" class="easyui-linkbutton bon1">{$vo.title}[{$vo.name} {$vo.version}]</a></case>
+        <default />未知错误
+        </switch></volist>
+				<p></p>
+            </div>
+        </div>
+    	<div class="formitm">
+            <label class="lab"  for="for_name">依赖插件：</label>
+            <div class="ipt">
+                <volist name='info["rely_addons"]' id='vo'>{$vo.name}{$vo.title}{$vo.version}{$vo.site}<br/></volist>
+				<p></p>
+            </div>
+        </div>
+		<div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#Module_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+	</fieldset>
+</div>
+<input type="hidden" name="modulename" value="{$name}">
+</form>
+</block>

@@ -1,0 +1,30 @@
+
+<div class="Tool_Bar" id="{$ModelInfo['name']}_Bar">
+<dl>
+	<dt>{$ModelInfo['title']}管理</dt>
+    <literal>{$Main_Nav}</literal>
+</dl>
+</div>
+<form id="{$ModelInfo['name']}_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#{$ModelInfo['name']}_Bar',toolPosition:'left',tabHeight:40,border:false" action="<literal>{:U('Admin/</literal>{$ModelInfo['name']}<literal>/edit')}</literal>" method="post">
+<volist name="FIELD_GROUP" id="FIELD_GROUP">
+    <div title="{$FIELD_GROUP}" style="padding:20px;">
+    <fieldset class="Form_1">
+    	<volist name="_Form[$key]" id="_Form">
+        <div class="formitm">
+            <label class="lab"  for="for_{$_Form['name']}">{$_Form['title']}：</label>
+            <div class="ipt">
+                {$_Form['form']}
+                <p>{$_Form['remark']}</p>
+            </div>
+        </div>
+        </volist>
+        <div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#{$Model_Name}_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+    </fieldset>
+    </div>
+</volist>
+<input name="id" type="hidden" value="<literal>{:I('get.id')}</literal>" />
+<!-- 扩展数据 starp-->
+{$Model_Info['_Parent_Model_Info']['edit_extend']|htmlspecialchars_decode}
+{$Model_Info['edit_extend']|htmlspecialchars_decode}
+<!-- 扩展数据 end-->
+</form>

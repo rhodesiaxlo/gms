@@ -1,0 +1,84 @@
+
+
+/*
+ * {$ModelInfo['title']}模型
+ * Auth   : Ghj
+ * Time   : <?php echo date("Y年m月d日",time());?> 
+ * QQ     : 912524639
+ * Email  : 912524639@qq.com
+ * Site   : http://guanblog.sinaapp.com/
+ */
+ 
+namespace Admin\Model;
+use Think\Model;
+
+class {$ModelInfo['name']}Model extends Model{
+	
+    /*模型中定义的表*/
+	protected $tableName = '{$ModelInfo['table_name']}'; 
+
+    /* 自动验证规则 */
+	protected $_validate = array(
+<?php
+	foreach ($ModelField as $key => $Field_One ){
+		if($Field_One['validate_rule']!=''){
+?>
+		{$Field_One['validate_rule']|htmlspecialchars_decode}
+
+<?php
+		}
+	}
+?> 
+	);
+
+    /* 自动完成规则 */
+	protected $_auto = array(
+<?php
+	foreach ($ModelField as $key => $Field_One ){
+		if($Field_One['type']=='datetime'){
+			if($Field_One['name'] == 'create_time'){
+?>
+		array("create_time","time",1,"function"),
+
+<?php
+			}elseif($Field_One['name'] == 'update_time'){
+?>
+		array("update_time","time",3,"function"),
+
+<?php
+			}else{
+				if($Field_One['validate_rule']==''){
+?>
+		array("{$Field_One['name']}","strtotime",3,"function"),
+
+<?php
+				}
+			}
+			
+		}
+		if(in_array($Field_One['type'],array('checkbox','select'))){
+			$_Extra=unserialize($Field_One['extra']);
+			if($_Extra['multiple']==1){
+?>
+		array("{$Field_One['name']}","Get_Checkbox_Value",3,"function"),
+
+<?php
+			}
+		}
+		if($Field_One['auto_rule']!=''){
+?>
+
+		{$Field_One['auto_rule']|htmlspecialchars_decode}
+
+<?php
+		}
+	}
+?>
+	);
+
+/* 扩展数据 开始 */
+
+{$ModelInfo['model_extend']|htmlspecialchars_decode}
+
+/* 扩展数据 结束 */
+}

@@ -1,0 +1,62 @@
+<extend name="Admin@Public/base"/><block name="body"><div class="Tool_Bar" id="Category_Bar">
+<dl>
+	<dt>分类管理</dt>
+    {$Main_Nav}
+</dl>
+</div>
+<table id="Category_Data_List"></table>
+<script charset="utf-8" src="{:U('Home/Api/get_model_id')}&r_type=json_list"></script>
+<script charset="utf-8" src="{:U('Admin/Function/get_field_option',array('f_id'=>'101','r_type'=>'json_list'))}"></script>
+<script charset="utf-8" src="{:U('Admin/Function/get_field_option',array('f_id'=>'115','r_type'=>'json_list'))}"></script>
+<script charset="utf-8" src="{:U('Admin/Function/get_field_option',array('f_id'=>'112','r_type'=>'json_list'))}"></script>
+<script type="text/javascript">
+$(function() {
+	$("#Category_Data_List").treegrid({
+		url : "{:U('AdminCategory/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		idField:'id',
+		treeField:'title',
+		pagination : false,
+		toolbar : '#Category_Bar',
+		singleSelect : true,
+		columns : [[
+			{field : 'id',title : 'ID',width : 40,sortable:true},
+			{field : "title",title : "栏目名称",width :250},
+			{field : "child",title : "终极栏目",width :100,formatter: function (value, row, index) {
+					return op_child[value];
+			}},
+			
+			{field : "status",title : "状态",width :50,formatter: function (value, row, index) {
+					return op_status[value];
+			}},
+			
+			{field : "hits",title : "点击",width :50},
+			
+			{field : "sort",title : "排序",width :50},
+			
+			{field : "ismenu",title : "显示",width :50,formatter: function (value, row, index) {
+					return op_ismenu[value];
+			}},
+				
+
+			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Category/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Category/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Ajax('<?php echo U('del'); ?>&id="+row.id+"','Category_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+<!-- 扩展数据 starp-->
+<!-- 扩展数据 end-->
+</script></block>

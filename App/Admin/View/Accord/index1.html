@@ -1,0 +1,94 @@
+<extend name="Admin@Public/base"/>
+<block name="body">
+<div class="Tool_Bar" id="{$Model_Name}_Bar">
+<dl>
+	<dt>{$Model_Title}</dt>
+	{$Main_Nav}
+</dl>
+</div>
+<table id="{$Model_Name}_Data_List"></table>
+
+<?php
+foreach ($_List as $key => $field ) {
+$extra=unserialize($field['extra']);
+if(in_array($field['type'],array('select','checkbox'))){
+if($extra['type']=='Option'){
+?>
+<script charset="utf-8" src="{:U('Admin/Function/get_field_option',array('f_id'=>$field['id'],'r_type'=>'json_list'))}"></script>
+<?php 
+}elseif($extra['type']=='Config'){
+?>
+<script charset="utf-8" src="{:U('Admin/Function/get_config',array('r_name'=>$field['name']))}&cname={$extra['option']}&r_type=json_list"></script>
+<?php 
+}elseif($extra['type']=='Function'){
+?>
+<script charset="utf-8" src="{:U($extra['option'])}&r_name={$field['name']}&r_type=json_list"></script>
+<?php 
+}
+}
+}
+?>
+<script type="text/javascript">
+$(function() {
+	$("#{$Model_Name}_Data_List").treegrid({
+		url : "{:U('index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		idField:'id',
+		treeField:'title',
+		pagination : false,
+		toolbar : '#AuthRule_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+			<?php foreach ($_List as $key => $field ) {
+				$extra=unserialize($field['extra']);
+				if(in_array($field['type'],array('select','checkbox'))){
+						echo '
+						{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',sortable:true,formatter: function (value, row, index) {
+								return op_'.$field["name"].'[value];
+						}},
+						';
+				}elseif(in_array($field['type'],array('datetime'))){
+					if($extra['from_type']=='datetimebox'){
+						echo '
+						{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',sortable:true,formatter: function (value, row, index) {
+							return u_to_ymdhis(value)
+						}},
+						';
+					}else{
+						echo '
+						{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',sortable:true,formatter: function (value, row, index) {
+							return u_to_ymd(value)
+						}},
+						';
+					}
+				}else{
+						echo '
+						{field : "'.$field["name"].'",title : "'.$field["title"].'",width :'.$field["l_width"].',sortable:true},
+						';
+				}
+			}?>
+			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/'.$Model_Name.'/edit')">
+				operate_menu = operate_menu+"<a href='{:U('edit',array('model'=>$Model_Name))}&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/'.$Model_Name.'/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Ajax('{:U('del',array('model'=>$Model_Name))}&id="+row.id+"','{$Model_Name}_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script>
+<!-- 扩展数据 starp-->
+{$Model_Info['_Parent_Model_Info']['index_extend']|htmlspecialchars_decode}
+{$Model_Info['index_extend']|htmlspecialchars_decode}
+<!-- 扩展数据 end-->
+</block>

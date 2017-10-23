@@ -1,0 +1,159 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="Tool_Bar" id="ModelField_Bar">
+<dl>
+	<dt>字段管理</dt>
+    <if condition="Is_Auth('Admin/Model/index')">
+	<dd><a href="{:U('Admin/Model/index')}" onclick="JavaScript:window.location.href='{:U('Admin/Model/index')}'"><span>模型列表</span></a></dd>
+    </if>
+	<if condition="Is_Auth('Admin/ModelField/index')">
+	<dd><a href="{:U('Admin/ModelField/index',array('model_id'=>I('get.model_id')))}" onclick="JavaScript:window.location.href='{:U('Admin/ModelField/index',array('model_id'=>I('get.model_id')))}'"><span>字段列表</span></a></dd>
+	</if>
+    <if condition="Is_Auth('Admin/ModelField/add')">
+	<dd><a href="{:U('Admin/ModelField/add',array('model_id'=>I('get.model_id')))}" onclick="JavaScript:window.location.href='{:U('Admin/ModelField/add',array('model_id'=>I('get.model_id')))}'"><span>新增</span></a></dd>
+	</if>
+	<dd><a class="current" href="#"><span>修改</span></a></dd>
+</dl>
+</div>
+<form id="ModelField_Form" class="easyui-tabs Updata_Form" data-options="fit:true,tools:'#ModelField_Bar',toolPosition:'left',tabHeight:40,border:false" action="{:U('ModelField/edit')}" method="post">
+<div title="基础设置" style="padding:20px;">
+<fieldset class="Form_1">
+      <div class="formitm">
+        <label class="lab"  for="for_name">字段名</label>
+        <div class="ipt">
+			<input name="name" style="height:30px;" id="for_name" type="text" class="easyui-textbox" data-options="value:'{$_info['name']}',required:true">
+			<p></p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_title">字段标题</label>
+        <div class="ipt">
+			<input name="title" style="height:30px;" id="for_title" type="text" class="easyui-textbox" data-options="value:'{$_info['title']}',required:true">
+			<p></p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_group_id">字段分组</label>
+        <div class="ipt">
+			<select style="height:30px;" id="for_group_id" name="group_id" class="easyui-combobox" data-options="value:'{$_info['group_id']}',multiple:false,required:false,editable:false">
+			<volist name="FIELD_GROUP" id="vo">
+				<option value="{$i}">{$vo}</option>
+			</volist>
+			</select>
+			<p>字段所在分组！</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_is_fixed">固定</label>
+		<div class="ipt">
+			<select style="height:30px;" id="for_is_fixed" name="is_fixed" class="easyui-combobox" data-options="value:'{$_info['is_fixed']}',multiple:false,required:false,editable:false">
+              <option value="0" >否</option>
+              <option value="1" >是</option>
+            </select>
+			<p>固定在列表左侧</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_type">数据类型</label>
+        <div class="ipt">
+			<select style="height:30px;" id="for_type" name="type" class="easyui-combobox" data-options="value:'{$_info['type']}',multiple:false,required:false,editable:false, onSelect:function(rec){field_setting(rec.value)}">
+			<volist name="Think.config.FIELD_LIST" id="vo">
+				<option value="{$vo.type}">{$vo.title}</option>
+			</volist>
+			</select>
+			<p>修改数据类型后，字段参数会发生改变，请慎重！</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_field">字段定义</label>
+		<div class="ipt">
+			<select style="height:30px;" id="for_field" name="field" class="easyui-combobox" data-options="value:'{$_info['field']}',multiple:false"></select>
+			<p>修改数据类型后，字段参数会发生改变，请慎重！</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab">字段属性</label>
+		<div class="ipt" id="extra">{$form_data}</div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_value">字段默认值</label>
+		<div class="ipt">
+			<input name="value" style="height:30px;" id="for_value" type="text" class="easyui-textbox" data-options="value:'{$_info['value']}',required:false">
+			<p>修改数据类型后，字段参数会发生改变，请慎重！</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_remark">备注</label>
+		<div class="ipt">
+			<textarea id="for_remark" name="remark" class="easyui-textbox" style="width:300px;height:100px;" data-options="required:false,multiline:true">{$_info['remark']}</textarea>
+			<p>修改数据类型后，字段参数会发生改变，请慎重！</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_sort_l">字段排序</label>
+		<div class="ipt">
+			列表
+			<input class="easyui-numberbox" style="height:30px;width:40px" type="text" name="sort_l" id="for_sort_l" value="{$_info['sort_l']}" data-options="min:0,max:999">
+			搜索
+			<input class="easyui-numberbox" style="height:30px;width:40px" type="text" name="sort_s" value="{$_info['sort_s']}" data-options="min:0,max:999">
+			新增
+			<input class="easyui-numberbox" style="height:30px;width:40px" type="text" name="sort_a" value="{$_info['sort_a']}" data-options="min:0,max:999">
+			修改
+            <input class="easyui-numberbox" style="height:30px;width:40px" type="text" name="sort_e" value="{$_info['sort_e']}" data-options="min:0,max:999">
+			<p>如果为0,即不显示</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_l_width">列表宽度</label>
+		<div class="ipt">
+			<input name="l_width" style="height:30px;" id="for_l_width" value="{$_info['l_width']}" type="text" class="easyui-numberbox" data-options="min:0,max:999,required:false">
+			<p></p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_validate_rule">验证规则</label>
+		<div class="ipt">
+			<textarea id="for_validate_rule" name="validate_rule" class="easyui-textbox" style="width:300px;height:100px;" data-options="required:false,multiline:true">{$_info['validate_rule']}</textarea>
+			<p>生成模型后，会自动将验证规则生成至模型中。</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_auto_rule">完成规则</label>
+		<div class="ipt">
+			<textarea id="for_auto_rule" name="auto_rule" class="easyui-textbox" style="width:300px;height:100px;" data-options="required:false,multiline:true">{$_info['auto_rule']}</textarea>
+			<p>生成模型后，会自动将验证规则生成至模型中。</p>
+        </div>
+      </div>
+      <div class="formitm">
+        <label class="lab"  for="for_status">状态</label>
+		<div class="ipt">
+			<select style="height:30px;" id="for_status" name="status" class="easyui-combobox" data-options="value:'{$_info['status']}',multiple:false,required:false,editable:false">
+              <option value="0" >禁用</option>
+              <option value="1" >启用</option>
+            </select>
+			<p></p>
+        </div>
+      </div>
+    <input type="hidden" name="model_id" value='{$_info["model_id"]}' />
+    <input type="hidden" name="id" value='{$_info["id"]}' />
+	<div class="formitm formitm-1"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="Sub_Form('#ModelField_Form');" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></div>
+	</fieldset>
+    </div>
+</form>
+<script type="text/javascript">
+	function field_setting(fieldtype) {
+		if (fieldtype == "") {
+			return false;
+		}
+		$.getJSON("{:U('Admin/Function/field_setting')}&r_type=json",{fieldtype:fieldtype}, function (data) {
+			$('#extra').html(data.extra);
+			$.parser.parse('#extra');
+		});
+		$('#for_field').combobox({
+			url: '{:U("Admin/Function/get_field_default")}&fieldtype=' + fieldtype,
+			valueField: 'id',
+			textField: 'text'
+		});
+	}
+</script> 
+</block>
